@@ -58,14 +58,18 @@ export default function Calendar() {
 
   const totalCells = weekday + days;
 
-  const cells = Array.from({length: totalCells}, (_, i) => {
-      const dayNumber = i - weekday + 1;
+  const cells = Array.from({length: 42}, (_, i) => {
+    const dayNumber = i - weekday + 1;
 
-      if (i < weekday) {
-          return <div key={i} className={styles.day}></div>
-      }
+    if (i < weekday) {
+      return <div key={i} className={styles.day}></div>
+    }
 
+    if (i < totalCells) {
       return <div key={i} className={styles.day}>{dayNumber}</div>
+    }
+
+    return <div key={i} className={styles.day}></div>
   });
 
   function prevMonth() {
