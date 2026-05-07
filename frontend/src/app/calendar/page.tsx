@@ -52,7 +52,7 @@ export default function Calendar() {
   const [days, setDays] = useState(0);
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
-  const [weekday, setWeekday] = useState();
+  const [weekday, setWeekday] = useState(0);
 
   const years = getYears();
 
@@ -61,15 +61,28 @@ export default function Calendar() {
   const cells = Array.from({length: 42}, (_, i) => {
     const dayNumber = i - weekday + 1;
 
+    const pMonthDays = getDaysInMonth(
+        month === 0 ? year - 1 : year,
+        month === 0 ? 11 : month - 1
+    );
+
     if (i < weekday) {
-      return <div key={i} className={styles.day}></div>
+      return (
+        <div key={i} className={`${styles.day} ${styles.day__muted}`}>
+          {pMonthDays - weekday + i + 1}
+        </div>
+      )
     }
 
-    if (i < totalCells) {
+    if (dayNumber <= days) {
       return <div key={i} className={styles.day}>{dayNumber}</div>
     }
 
-    return <div key={i} className={styles.day}></div>
+    return (
+      <div key={i} className={`${styles.day} ${styles.day__muted}`}>
+        {i - totalCells + 1}
+      </div>
+    )
   });
 
   function prevMonth() {
