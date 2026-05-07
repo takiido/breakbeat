@@ -68,6 +68,24 @@ export default function Calendar() {
       return <div key={i} className={styles.day}>{dayNumber}</div>
   });
 
+  function prevMonth() {
+    if (month === 0) {
+      setMonth(11);
+      setYear((y) => y - 1);
+      return;
+    }
+    setMonth((m) => m - 1);
+  }
+  
+  function nextMonth() {
+    if (month === 11) {
+      setMonth(0);
+      setYear((y) => y + 1);
+      return;
+    }
+    setMonth((m) => m + 1);
+  }
+
   useEffect(() => {
       setDays(getDaysInMonth(year, month));
 
@@ -77,20 +95,30 @@ export default function Calendar() {
 
   return (
     <div>
-      <select value={month} onChange={(e) => setMonth(Number(e.target.value))}>
-        {months.map((m, i) => (
-          <option key={m} value={i}>
-            {m}
-          </option>
-        ))}
-      </select>
-      <select value={year} onChange={(e) => setYear(Number(e.target.value))}>
-        {years.map((y) => (
-          <option key={y} value={y}>
-            {y}
-          </option>
-        ))}
-      </select>
+      <div className={styles.calendar_controls}>
+        <select value={month} onChange={(e) => setMonth(Number(e.target.value))}>
+          {months.map((m, i) => (
+            <option key={m} value={i}>
+              {m}
+            </option>
+          ))}
+        </select>
+
+        <select value={year} onChange={(e) => setYear(Number(e.target.value))}>
+          {years.map((y) => (
+            <option key={y} value={y}>
+              {y}
+            </option>
+          ))}
+        </select>
+
+        <button onClick={() => prevMonth()}>
+          {"<"}
+        </button>
+        <button onClick={() => nextMonth()}>
+          {">"}
+        </button>
+      </div>
 
       <div className={styles.calendar}>
       {weekdays.map((wd) => (

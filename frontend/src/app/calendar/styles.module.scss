@@ -2,15 +2,18 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 
+  &_controls {
+    display: flex;
+  }
+
   &_header {
-    padding: 16px 32px;
     font-weight: bold;
-    background: #fefefe;
+    background: rgba(#cccccc, 0.25);
     border: 1px solid #cccccc;
   }
 }
 
 .calendar .day {
-  padding: 16px 32px;
+  padding: 30px 0;
   border: 1px solid #eeeeee;
 }
