@@ -1,0 +1,28 @@
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  &_controls {
+    display: flex;
+  }
+
+  &_header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(#808080, 0.25);
+    border: 1px solid rgba(#808080, 0.5);
+  }
+}
+
+.calendar .day {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(#808080, 0.5);
+  &__muted {
+    color: color-mix(in srgb, currentColor 30%, transparent);
+  }
+}
