@@ -1,6 +1,6 @@
 from datetime import datetime
-from sqlachemy import String, DateTime, func
-from sqlachemy.orm import Mapped, mapped_column
+from sqlalchemy import String, DateTime, func, Boolean
+from sqlalchemy.orm import Mapped, mapped_column
 
 
 from src.database import Base
