@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from src.database import get_db
+from src.auth.models import User
 from src.auth.schemas import (
         UserRegister, UserLogin, TokenPair,
         RefreshRequest, UserOut
