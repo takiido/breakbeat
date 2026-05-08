@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 from src.auth.models import User
 from src.auth.schemas import UserRegister
 from src.auth.exceptions import (
-        EmailTaken, UsernameTaken,
-        InvalidCredentials, InactiveUser
+        EmailTaken, UsernameTaken, InvalidCredentials,
+        Invalid Token, InactiveUser
 )
 from src.auth.utils import (
         hash_password, create_access_token,
@@ -70,7 +70,9 @@ def refresh_tokens(db: Session, user_id: int) -> dict:
     """Issue a new token pair for an active user id."""
 
     user = db.query(User).filter(User.id == user_id).first()
-    if not user or not user.is_active:
+    if not user:
+        raise InvalidToken
+    if not user.is_active:
         raise InactiveUser
 
     return {
