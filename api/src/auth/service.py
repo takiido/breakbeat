@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 
 from src.auth.models import User
 from src.auth.schemas import UserRegister
@@ -39,7 +40,11 @@ def register_user(db: Session, data: UserRegister) -> dict:
             hashed_password = hash_password(data.password),
     )
     db.add(user)
-    db.commit()
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise EmailTaken
     db.refresh(user)
 
     return {
