@@ -49,7 +49,7 @@ def decode_token(token:str, expected_type: str) -> int:
                              algorithms=[settings.JWT_ALGORITHM])
         if payload.get("type") != expected_type:
             raise ValueError
-        return int(payload("sub"))
+        return int(payload["sub"])
     except (JWTError, ValueError, KeyError):
         from src.auth.exceptions import InvalidToken
         raise InvalidToken
