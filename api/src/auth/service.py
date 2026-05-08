@@ -52,19 +52,19 @@ def login_user(db: Session, email: str, password: str) -> dict:
         raise InactiveUser
 
     return {
-        "access_token": create_access_token(user.id)
-        "refresh_token": create_refresh_token(user.id)
+        "access_token": create_access_token(user.id),
+        "refresh_token": create_refresh_token(user.id),
         "token_type": "bearer",
     }
 
 
-def refresh_token(db: Session, user_id: int) -> dict:
+def refresh_tokens(db: Session, user_id: int) -> dict:
     user = db.query(User).filter(User.id == user_id).first()
     if not user or not user.is_active:
         raise InactiveUser
 
     return {
-        "access_token": create_access_token(user_id)
-        "refresh_token": create_refresh_token(user_id)
+        "access_token": create_access_token(user_id),
+        "refresh_token": create_refresh_token(user_id),
         "token_type": "bearer",
     }
