@@ -1,8 +1,9 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-import os
 
 
 class Settings(BaseSettings):
+    """Application settings loaded from environment variables."""
+
     DB_URL: str
     JWT_SECRET: str
     JWT_ALGORITHM: str = "HS256"

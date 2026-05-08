@@ -13,14 +13,20 @@ from src.auth.utils import (
 
 
 def get_user_by_email(db: Session, email: str) -> User | None:
+    """Return the user that matches an email, if any."""
+
     return db.query(User).filter(User.email == email).first()
 
 
 def get_user_by_username(db: Session, username: str) -> User | None:
+    """Return the user that matches a username, if any."""
+
     return db.query(User).filter(User.username == username).first()
 
 
 def register_user(db: Session, data: UserRegister) -> dict:
+    """Create a user and return the initial token pair."""
+
     if get_user_by_email(db, data.email):
         raise EmailTaken
 
@@ -44,6 +50,8 @@ def register_user(db: Session, data: UserRegister) -> dict:
 
 
 def login_user(db: Session, email: str, password: str) -> dict:
+    """Validate credentials and return a fresh token pair."""
+
     user = get_user_by_email(db, email)
     if not user or not verify_password(password, user.hashed_password):
         raise InvalidCredentials
@@ -59,6 +67,8 @@ def login_user(db: Session, email: str, password: str) -> dict:
 
 
 def refresh_tokens(db: Session, user_id: int) -> dict:
+    """Issue a new token pair for an active user id."""
+
     user = db.query(User).filter(User.id == user_id).first()
     if not user or not user.is_active:
         raise InactiveUser
