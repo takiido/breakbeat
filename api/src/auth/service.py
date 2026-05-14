@@ -5,7 +5,7 @@ from src.auth.models import User
 from src.auth.schemas import UserRegister
 from src.auth.exceptions import (
         EmailTaken, UsernameTaken, InvalidCredentials,
-        Invalid Token, InactiveUser
+        InvalidToken, InactiveUser
 )
 from src.auth.utils import (
         hash_password, create_access_token,
