@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 import { LoginData, RegisterData, RefreshData, TokenPair } from "@/lib/types";
 import { post } from "@/lib/api";
 
-const ACCESS_TOKEN_MAX_AGE: number = parseInt(process.env.ACCESS_TOKEN_EXPIRE_MINUTES ?? "0") * 60;
-const REFRESH_TOKEN_MAX_AGE: number = parseInt(process.env.REFRESH_TOKEN_EXPIRE_DAYS ?? "0") * 24 * 60 * 60;
+const ACCESS_TOKEN_MAX_AGE: number = parseInt(process.env.ACCESS_TOKEN_EXPIRE_MINUTES ?? "15") * 60;
+const REFRESH_TOKEN_MAX_AGE: number = parseInt(process.env.REFRESH_TOKEN_EXPIRE_DAYS ?? "14") * 24 * 60 * 60;
 
 export async function getTokenPair(): Promise<TokenPair> {
     const cookieStore = await cookies();
