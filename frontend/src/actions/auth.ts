@@ -57,5 +57,5 @@ export async function logout(): Promise<void> {
     const cookieStore = await cookies();
     cookieStore.delete("access_token");
     cookieStore.delete("refresh_token");
-    redirect("/");
+    redirect("/auth?mode=login");
 }
