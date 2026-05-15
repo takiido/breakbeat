@@ -19,8 +19,14 @@ async function request<T>(endpoint: string, method: string, params?: Record<stri
   });
 
   if (!res.ok) {
-    const error = await res.json();
-    throw new Error(error.detail || "An error occurred");
+    let detail = "An error occurred";
+    try {
+      const error = await res.json();
+      detail = error.detail || detail;
+    } catch {
+      detail = await res.text();
+    }
+    throw new Error(detail);
   }
 
   return await res.json() as T;
