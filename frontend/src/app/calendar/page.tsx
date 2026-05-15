@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
+import { logout } from "@/actions/auth";
 
 const weekdays = [
     "Mon",
@@ -145,6 +146,7 @@ export default function Calendar() {
       ))}
       {cells}
       </div>
+      <button onClick={() => logout()}>Logout</button>
     </div>
   );
 }
