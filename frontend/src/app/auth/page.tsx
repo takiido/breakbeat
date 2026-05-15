@@ -76,7 +76,7 @@ export default function AuthPage() {
             />
 
             <button type="submit">Register</button>
-            <button onClick={() => setMode("login")}>Already registered? Sign in</button>
+            <button onClick={() => setMode("login")} type="button">Already registered? Sign in</button>
           </form>
       }
       {mode === "login" &&
@@ -102,7 +102,7 @@ export default function AuthPage() {
           />
 
           <button type="submit">Sign in</button>
-          <button onClick={() => setMode("register")}>Don't have account? Register</button>
+          <button onClick={() => setMode("register")} type="button">Don't have account? Register</button>
         </form>
       }
     </div>
