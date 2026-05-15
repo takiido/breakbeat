@@ -21,24 +21,29 @@ export default function AuthPage() {
   });
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    setError(null);
     e.preventDefault();
-    if (mode === "register") {
-      await register(registerData);
-    }
-    if (mode === "login") {
-      await login(loginData);
+    try {
+      if (mode === "register") await register(registerData);
+      if (mode === "login") await login(loginData);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "An unknown error occurred");
     }
   }
 
   useEffect(() => {
-    setMode(searchParams.get("mode"));
+    if (!searchParams.get("mode")) {
+      setMode("login");
+    }
+    else {
+      setMode(searchParams.get("mode"));
+    }
   }, [searchParams]);
-
   return(
     <div> 
-      {
-        mode === "register" ?
+      {error && <p>{error}</p>}
+      {mode === "register" &&
           <form className={styles.register_form} onSubmit={handleSubmit}>
             <label htmlFor="reg-username">Username:</label>
             <input 
@@ -73,7 +78,8 @@ export default function AuthPage() {
             <button type="submit">Register</button>
             <button onClick={() => setMode("login")}>Already registered? Sign in</button>
           </form>
-      :
+      }
+      {mode === "login" &&
         <form className={styles.register_form} onSubmit={handleSubmit}>
           <label htmlFor="reg-email">Email:</label>
           <input 
