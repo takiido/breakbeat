@@ -21,7 +21,7 @@ export default function AuthPage() {
   });
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     setError(null);
     e.preventDefault();
     try {
