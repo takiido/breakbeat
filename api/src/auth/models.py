@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy import String, DateTime, func, Boolean
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
 from src.database import Base
@@ -14,4 +14,13 @@ class User(Base):
     username: Mapped[str] = mapped_column(String(50), unique=True, index=True)
     hashed_password: Mapped[str] = mapped_column(String(255))
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        server_default=func.now(),
+    )
+
+    calendars: Mapped[list["Calendar"]] = relationship(
+        "Calendar",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
