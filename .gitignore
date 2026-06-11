@@ -1,5 +1,9 @@
 .env*
 !.env.example
 
+# opencode
+.agents
+skills-lock.json
+
 # api
 __pycache__
