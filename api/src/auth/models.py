@@ -2,7 +2,6 @@ from datetime import datetime
 from sqlalchemy import String, DateTime, func, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-
 from src.database import Base
 
 

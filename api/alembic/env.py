@@ -7,8 +7,7 @@ from alembic import context
 
 from src.config import settings
 from src.database import Base
-from src.auth import models # noqa: F401
-from src.calendar import models # noqa: F401
+from src import models  # noqa: F401
 
 config = context.config
 

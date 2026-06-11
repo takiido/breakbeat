@@ -3,6 +3,7 @@ from sqlalchemy import text
 
 from src.database import engine
 from src.auth.router import router as auth_router
+from src import models  # noqa: F401
 
 
 app = FastAPI(docs_url="/docs")
